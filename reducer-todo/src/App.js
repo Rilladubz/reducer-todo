@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useReducer, useEffect } from "react";
+import "./App.css";
 
-function App() {
+//Components
+import TodoForm from "./Components/TodoForm";
+import TodoList from "./Components/TodoList";
+
+//State Management
+import { initialState, taskReducer } from "./reducers/reducer";
+
+const App = () => {
+  const [{ tasks }, dispatch] = useReducer(taskReducer, initialState);
+  // ^^ is destructuring VV
+  // const [state , dispatch] = useReducer(taskReducer, initialState);
+
+  // const [item, setItem] = useState([])
+  // console.log('APP STATE:', state)
+
+  const submitHandler = task => {
+    dispatch({ type: "ADD_TODO", payload: task });
+  };
+
+  const handleChecked = id => {
+    dispatch({ type: "TOGGLE_COMPLETED", payload: id });
+  };
+
+  const handleDelete = id => {
+    dispatch({ type: "DELETE_TASK", payload: id });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TodoForm
+        submitHandler={submitHandler}
+        handleDelete={handleDelete}
+        toDo={tasks}
+      />
+      {/* <TodoForm /> */}
+      <TodoList
+        toDo={tasks}
+        handleChecked={handleChecked}
+        handleDelete={handleDelete}
+      />
     </div>
   );
-}
+};
 
 export default App;
