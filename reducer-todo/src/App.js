@@ -24,15 +24,15 @@ const App = () => {
     dispatch({ type: "TOGGLE_COMPLETED", payload: id });
   };
 
-  const handleDelete = id => {
-    dispatch({ type: "DELETE_TASK", payload: id });
+  const handleDelete = () => {
+    dispatch({ type: "DELETE_TASK" });
   };
 
   return (
     <div className="App">
       <TodoForm
         submitHandler={submitHandler}
-        handleDelete={handleDelete}
+        // handleDelete={handleDelete}
         toDo={tasks}
       />
       {/* <TodoForm /> */}

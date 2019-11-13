@@ -8,6 +8,20 @@ export const initialState = {
   ]
 };
 
+// state = {
+//   tasks: [
+//     {
+
+//     }
+//     {
+
+//     }
+//   ]
+//   {
+
+//   }
+// }
+
 export const taskReducer = (state, action) => {
   console.log("IN REDUCER", state);
   switch (action.type) {
